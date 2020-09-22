@@ -34,17 +34,35 @@ case $command in
 	'search')
 		echo "${BLUE_FG}Enter arguments${NORMAL}"
 		read directory string
-		bash search.sh $directory $string
+		flag=$(check_search $directory $string)
+		if [[ $flag -eq 0 ]]
+		then
+			bash search.sh $directory $string
+		else
+			bash errors_code.sh $flag
+		fi
 		;;
 	'reverse')
 		echo "${BLUE_FG}Enter arguments${NORMAL}"
 		read file1 file2
-		bash reverse.sh $file1 $file2
+		flag=$(check_reverse $file1 $file2)
+		if [[ $flag -eq 0 ]]
+		then 
+			bash reverse.sh $file1 $file2
+		else 
+			bash errors_code.sh $flag
+		fi
 		;;
 	'strlen')
 		echo "${BLUE_FG}Enter arguments${NORMAL}"
 		read string
-		bash strlen.sh $string
+		flag=$(check_strlen $string)
+		if [[ $flag -eq 0 ]]
+		then
+			bash strlen.sh $string
+		else 
+			bash errors_code.sh $string
+		fi
 		;;
 	'log')
 		bash log.sh

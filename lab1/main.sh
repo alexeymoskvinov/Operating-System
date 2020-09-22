@@ -11,18 +11,38 @@ case $1 in
 			bash calc.sh $2 $3 $4
 		else
 			bash errors_code.sh $flag
-			echo $flag
 			exit $flag		
 		fi
 		;;
 	'search')
-		bash search.sh
+		flag=$(check_search $2 $3)
+		if [[ $flag -eq 0 ]]
+		then
+			bash search.sh $2 $3
+		else 
+			bash errors_code.sh $flag
+			exit $flag
+		fi
 		;;
 	'reverse')
-		bash reverse.sh
+		flag=$(check_reverse $2 $3)
+		if [[ $flag -eq 0 ]]
+		then
+			bash reverse.sh $2 $3
+		else 
+			bash errors_code.sh $flag
+			exit $flag
+		fi
 		;;
 	'strlen')
-		bash strlen.sh
+		flag=$(check_strlen $2)
+		if [[ $flag -eq 0 ]]
+		then
+			bash strlen.sh
+		else 
+			bash errors_code.sh $flag
+			exit $flag
+		fi
 		;;
 	'log')
 		bash log.sh

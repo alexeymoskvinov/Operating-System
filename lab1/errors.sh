@@ -28,3 +28,27 @@ check_calc(){
 	echo 0
 }
 
+check_search(){
+	if ! [[ $# == 2 ]]
+	then 
+		echo -1
+		exit
+	fi
+}
+
+check_reverse(){
+	if ! [[ $# == 2 ]]
+	then 
+		echo -1
+		exit
+	fi
+}
+
+check_strlen(){
+	if ! [[ $# == 1 ]]
+	then 
+		echo -1
+		exit 
+	fi
+}
+
