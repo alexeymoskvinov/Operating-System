@@ -16,6 +16,7 @@ case $1 in
 		;;
 	'search')
 		flag=$(check_search $2 $3)
+		
 		if [[ $flag -eq 0 ]]
 		then
 			bash search.sh $2 $3
@@ -35,20 +36,33 @@ case $1 in
 		fi
 		;;
 	'strlen')
-		flag=$(check_strlen $2)
-		if [[ $flag -eq 0 ]]
+		if [[ $# == 2 ]]
 		then
-			bash strlen.sh
+			bash strlen.sh "$2"
 		else 
-			bash errors_code.sh $flag
-			exit $flag
+			bash errors_code.sh -1
+			exit -1
 		fi
 		;;
 	'log')
-		bash log.sh
+		flag=$(check_log)
+		if [[ flag -eq 0 ]]
+		then 
+			bash log.sh
+		else
+			bash errors_code.sh -5
+			exit -5
+		fi
 		;;
 	'exit')
-		bash exit.sh
+		flag=$(check_exit $2)
+		if [[ $flag -eq 0 ]]
+		then
+			bash exit.sh $2
+		else
+			bash errors_code.sh $flag
+			exit $flag
+		fi
 		;;
 	'help')
 		bash help.sh
@@ -56,8 +70,11 @@ case $1 in
 	'interactive')
 		bash interactive.sh
 		;;
-	*)
-		echo "wrong command"
-		bash help.sh	
+	*)	
+		flag=-6
+		bash errors_code.sh $flag
+		bash help.sh
+		exit -6
+		
 esac
 

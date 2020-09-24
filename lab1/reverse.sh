@@ -1,5 +1,6 @@
 
-#! /usr/bin/bash
+#!/usr/bin/bash
 
-cat $1 | tac -r -s '.\|' >  $2
+txt=$(tac $1 2>/dev/null)
+echo $txt | rev>$2
 

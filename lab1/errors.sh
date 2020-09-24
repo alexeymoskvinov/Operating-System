@@ -34,7 +34,16 @@ check_search(){
 		echo -1
 		exit
 	fi
+
+	if ! [[ -d $1 ]]
+	then
+		echo -5
+		exit
+	fi
+
+	echo 0
 }
+
 
 check_reverse(){
 	if ! [[ $# == 2 ]]
@@ -42,13 +51,43 @@ check_reverse(){
 		echo -1
 		exit
 	fi
-}
 
-check_strlen(){
-	if ! [[ $# == 1 ]]
+	if ! [[ -e $1 ]]
 	then 
-		echo -1
-		exit 
+		echo -7
+		exit
 	fi
+	
+	txt=$(tac $1 2>/dev/null)
+	if ! [[ $? -eq 0 ]]
+	then
+		echo -7
+		exit
+	fi
+	echo 0
 }
 
+check_log(){
+	if [[ -d /usr/share/man/man3p/log.3p.gz ]]
+	then
+		echo -5
+		exit
+	fi
+	echo 0
+}
+
+check_exit(){
+	if ! [[ $# == 1 ]] && ! [[ $# == 0 ]]
+	then
+		echo -1
+		exit
+	fi
+
+	if ! [[ $1 =~ ^-?[0-9]+$ ]] && ! [[ $# == 0 ]]
+	then
+		echo -2
+		exit
+	fi
+	echo 0
+
+}
