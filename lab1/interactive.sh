@@ -56,21 +56,28 @@ case $command in
 	'strlen')
 		echo "${BLUE_FG}Enter arguments${NORMAL}"
 		read string
-		flag=$(check_strlen $string)
-		if [[ $flag -eq 0 ]]
-		then
-			bash strlen.sh $string
-		else 
-			bash errors_code.sh $string
-		fi
+		bash strlen.sh "$string"
 		;;
+	
 	'log')
-		bash log.sh
+		flag=$(check_log)
+		if [[ flaq -eq 0 ]]
+		then
+			bash log.sh
+		else
+			bash errors_code.sh $flag
+		fi
 		;;
 	'exit')
 		echo "${BLUE_FG}Enter arguments${NORMAL}"
 		read return_code
-		exit $return_code
+		flag=$(check_exit $return_code)
+		if [[ $flag -eq 0 ]]
+		then
+			exit $return_code
+		else 
+			bash errors_code.sh $flag
+		fi
 		;;
 	'help')
 		bash help.sh
