@@ -1,4 +1,4 @@
-#!usr/bin/bash
+#!/bin/bash
 
 . ./errors.sh
 . ./errors_code.sh

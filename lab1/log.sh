@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 war="\(WW\)"
 inf="\(II\)"

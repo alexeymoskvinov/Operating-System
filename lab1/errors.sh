@@ -1,4 +1,4 @@
-#!usr/bin/bash
+#!bin/bash
 
 check_calc(){
 	if ! [[ $# == 3 ]]
